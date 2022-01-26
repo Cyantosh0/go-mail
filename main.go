@@ -6,6 +6,7 @@ import (
 
 	"github.com/joho/godotenv"
 
+	"github.com/Cyantosh0/go-mail/messages"
 	"github.com/Cyantosh0/go-mail/service"
 )
 
@@ -23,8 +24,9 @@ func main() {
 		"receiver1@gmail.com",
 		"receiver2@gmail.com",
 	}
+
 	// Message
-	message := []byte("Hello Receiver! I hope you are fine.")
+	message := messages.ProperMail("receiver1@gmail.com", "Testing", "This is the email test body.")
 
 	// Send Email
 	err = mailer.SendMail(to, message)
