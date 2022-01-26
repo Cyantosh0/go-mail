@@ -1,0 +1,5 @@
+Mr/Mrs {{.Name}},
+
+You have received a new message from the {{.Organization}}.
+
+Thank you!

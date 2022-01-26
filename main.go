@@ -27,14 +27,14 @@ func main() {
 
 	// Message
 	// message := messages.ProperMail("receiver1@gmail.com", "Testing", "This is the email test body.")
-	body := struct {
+	data := struct {
 		Name,
-		Message string
+		Organization string
 	}{
-		Name:    "Reciever",
-		Message: "This is the test message.",
+		Name:         "Patient P001",
+		Organization: "Bir Hospital",
 	}
-	message := messages.MailUsingHTMLTemplate("templates/email_template.html", body)
+	message := messages.MailUsingTemplate("templates/email_template.txt", data)
 
 	// Send Email
 	err = mailer.SendMail(to, message)

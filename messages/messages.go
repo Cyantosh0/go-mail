@@ -20,7 +20,7 @@ func ProperMail(to, subject, body string) []byte {
 	return []byte(mail)
 }
 
-func MailUsingHTMLTemplate(templatePath string, message interface{}) []byte {
+func MailUsingTemplate(templatePath string, data interface{}) []byte {
 	t, _ := template.ParseFiles(templatePath)
 
 	var body bytes.Buffer
@@ -28,6 +28,6 @@ func MailUsingHTMLTemplate(templatePath string, message interface{}) []byte {
 	headers := "MIME-version: 1.0;\nContent-Type: text/html;"
 	body.Write([]byte(fmt.Sprintf("Subject: my subject\n%s\n\n", headers)))
 
-	t.Execute(&body, message)
+	t.Execute(&body, data)
 	return body.Bytes()
 }
