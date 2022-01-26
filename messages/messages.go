@@ -1,6 +1,10 @@
 package messages
 
-import "fmt"
+import (
+	"bytes"
+	"fmt"
+	"text/template"
+)
 
 func MailWithBodyOnly() []byte {
 	body := "Hello Receiver! I hope you are fine."
@@ -14,4 +18,16 @@ func ProperMail(to, subject, body string) []byte {
 		"%s\r\n", to, subject, body)
 
 	return []byte(mail)
+}
+
+func MailUsingHTMLTemplate(templatePath string, message interface{}) []byte {
+	t, _ := template.ParseFiles(templatePath)
+
+	var body bytes.Buffer
+
+	headers := "MIME-version: 1.0;\nContent-Type: text/html;"
+	body.Write([]byte(fmt.Sprintf("Subject: my subject\n%s\n\n", headers)))
+
+	t.Execute(&body, message)
+	return body.Bytes()
 }
